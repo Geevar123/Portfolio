@@ -1,0 +1,17 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+body {
+  background: #010c15;
+  font-family: "Fira Code", monospace;
+  margin: 15px;
+  border: 1px solid #1e2d3d;
+  border-radius: 8px;
+}/*# sourceMappingURL=main.css.map */

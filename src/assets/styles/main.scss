@@ -1,0 +1,18 @@
+@import '@/assets/styles/mixins';
+@import '@/assets/styles/variables';
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+body {
+  background: $blue-dark;
+  font-family: 'Fira Code', monospace;
+  margin: 15px;
+  border: 1px solid $blueHex-02;
+  border-radius: 8px;
+}
