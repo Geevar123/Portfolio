@@ -4,7 +4,7 @@
             <li class="sidebar__menu-list" @click="goToHome">_hello</li>
             <li class="sidebar__menu-list" @click="goToAbout">_about-me</li>
             <li class="sidebar__menu-list" @click="goToProjects">_projects</li>
-            <li class="sidebar__menu-list">_contact-me</li>
+            <li class="sidebar__menu-list" @click="goToContactMe">_contact-me</li>
         </ul>
     </aside>
 </template>
@@ -25,6 +25,10 @@ const goToProjects = () => {
 const goToHome = () => {
     stateStore.isSidebarOpen = false
     stateStore.ishelloOpen = true
+}
+const goToContactMe = () => {
+    stateStore.isSidebarOpen = false
+    stateStore.isContactMeOpen = true
 }
 </script>
 

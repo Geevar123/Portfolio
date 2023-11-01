@@ -26,6 +26,10 @@ const toggleView = () => {
         stateStore.isProjectPageOpen = false
         stateStore.isSidebarOpen = true
     }
+    else if (stateStore.isContactMeOpen) {
+        stateStore.isContactMeOpen = false
+        stateStore.isSidebarOpen = true
+    }
 }
 </script>
 
