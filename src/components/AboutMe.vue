@@ -9,32 +9,36 @@
                     @click="stateStore.togglePersonalInfo">personal-info</h3>
                 <ul v-show="stateStore.isPersonalInfoOpen" class="about-me__personal-tabs">
                     <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--bio-tab">bio</h4>
-                    </li>
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--interest-tab">interests</h4>
+                        <h4 @click="stateStore.toggleBio" class="about-me__personal-tab about-me__personal-tab--bio-tab">bio
+                        </h4>
                     </li>
                     <li class="about-me__tab-wrapper">
                         <h4 class="about-me__personal-tab about-me__personal-tab--education-tab">education</h4>
-                        <ul>
-                            <li>high-school</li>
-                            <li>higher-secondary</li>
-                            <li>university</li>
-                        </ul>
+                    </li>
+                    <li class="about-me__tab-wrapper">
+                        <h4 class="about-me__personal-tab about-me__personal-tab--interest-tab">interested</h4>
                     </li>
                 </ul>
             </li>
             <li class="about-me__tab">
-                <h3 class="about-me__tab-title">professional-info</h3>
-            </li>
-            <li class="about-me__tab">
-                <h3 class="about-me__tab-title">hobbies</h3>
+                <h3 @click.prevent="stateStore.toggleProfessionalTab" class="about-me__tab-title">professional-info</h3>
+                <ul v-show="stateStore.isProfessionalTabOpen" class="about-me__personal-tabs">
+                    <li class="about-me__tab-wrapper">
+                        <h4 class="about-me__personal-tab about-me__personal-tab--bio-tab">skills</h4>
+                    </li>
+                    <li class="about-me__tab-wrapper">
+                        <h4 class="about-me__personal-tab about-me__personal-tab--interest-tab">languages</h4>
+                    </li>
+                    <li class="about-me__tab-wrapper">
+                        <h4 class="about-me__personal-tab about-me__personal-tab--education-tab">experience</h4>
+                    </li>
+                </ul>
             </li>
             <li class="about-me__tab">
                 <h3 class="about-me__tab-title">contacts</h3>
             </li>
         </ul>
-        <section class="about-me__content">
+        <section v-show="stateStore.isBioOpen" class="about-me__content">
             <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/ bio</span>
             </h3>
             <p class="about-me__content-info">
@@ -46,17 +50,21 @@
                 top-quality work. I stay updated with the latest trends, always ready to explore new projects and
                 opportunities. Let's connect and discuss the exciting world of web development.
             </p>
-            <h3 class="about-me__content-title">// Code snippet showcase: </h3>
-            <code-snippet />
         </section>
+        <code-snippet />
     </main>
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { useStateStore } from '@/stores/StateStore';
 import CodeSnippet from '@/components/CodeSnippet.vue';
 
 const stateStore = useStateStore()
+onMounted(() => {
+    stateStore.isPersonalInfoOpen = true
+    stateStore.isBioOpen = true
+})
 </script>
 
 <style scoped lang="scss">
@@ -177,7 +185,8 @@ const stateStore = useStateStore()
     }
 
     &__content {
-        padding: 0 27px 38px;
+        margin-block: 38px;
+        padding-inline: 27px;
     }
 
     &__content-title {
@@ -186,7 +195,7 @@ const stateStore = useStateStore()
         font-size: 16px;
         font-weight: 400;
         line-height: 22px;
-        margin-block: 38px 17px;
+        margin-bottom: 17px;
 
         &--bio {
             color: $blueHex-05;

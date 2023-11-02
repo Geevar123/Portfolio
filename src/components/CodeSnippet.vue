@@ -1,23 +1,39 @@
 <template>
-    <figure class="code-snippet">
-        <header class="code-snippet__header">
-            <div class="code-snippet__user-head"></div>
-            <div class="code-snippet__user-data">
-                <h4 class="code-snippet__user-name">@davidwilliams</h4>
-                <p class="code-snippet__user-time">5 months ago</p>
-            </div>
-            <h5 class="code-snippet__user-details">details</h5>
-        </header>
-        <p class="code-snippet__code-display">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat provident totam saepe, cumque odio
-            itaque repudiandae quis corporis fuga, earum obcaecati sed tenetur iste suscipit ullam eaque ipsum.
-            ratione ea voluptas
-        </p>
-    </figure>
+    <div class="code-snippet__wrapper">
+        <h3 class="code-snippet__title">// Code snippet showcase: </h3>
+        <figure class="code-snippet">
+            <header class="code-snippet__header">
+                <div class="code-snippet__user-head"></div>
+                <div class="code-snippet__user-data">
+                    <h4 class="code-snippet__user-name">@davidwilliams</h4>
+                    <p class="code-snippet__user-time">5 months ago</p>
+                </div>
+                <h5 class="code-snippet__user-details">details</h5>
+            </header>
+            <p class="code-snippet__code-display">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat provident totam saepe, cumque odio
+                itaque repudiandae quis corporis fuga, earum obcaecati sed tenetur iste suscipit ullam eaque ipsum.
+                ratione ea voluptas
+            </p>
+        </figure>
+    </div>
 </template>
 
 <style scoped lang="scss">
 .code-snippet {
+    &__wrapper {
+        padding-inline: 27px;
+        margin-block: 38px;
+    }
+
+    &__title {
+        color: $whiteHex;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        margin-bottom: 17px;
+    }
+
     &__header {
         display: flex;
         flex-direction: row;

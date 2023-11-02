@@ -19,7 +19,7 @@
                 </div>
             </li>
         </ul>
-        <form v-if="stateStore.isSuccess" class="contact-me__content">
+        <form v-if="!stateStore.isSuccess" class="contact-me__content">
             <div class="contact-me__content-wrapper">
                 <label for="name" class="contact-me__label">_name:</label>
                 <input type="text" class="contact-me__input" id="name">
@@ -176,6 +176,7 @@ const stateStore = useStateStore()
 
         &--new {
             width: auto;
+            margin-top: 8px
         }
     }
 

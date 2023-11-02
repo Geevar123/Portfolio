@@ -9,14 +9,39 @@ export const useStateStore = defineStore('state', () => {
     const isContactMeOpen = ref(false)
     const isFindMeOpen = ref(false)
     const isSuccess = ref(false)
+    const isEducationOpen = ref(false)
+    const isProfessionalTabOpen = ref(false)
+    const isBioOpen = ref(false)
     const toggleSidebar = () => {
         isSidebarOpen.value = !isSidebarOpen.value
     }
     const togglePersonalInfo = () => {
-        isPersonalInfoOpen.value = !isPersonalInfoOpen.value
+        if (isProfessionalTabOpen.value) {
+            isProfessionalTabOpen.value = false
+            isPersonalInfoOpen.value = true
+        }
+        else {
+            isPersonalInfoOpen.value = !isPersonalInfoOpen.value
+        }
+
+    }
+    const toggleProfessionalTab = () => {
+        if (isPersonalInfoOpen.value) {
+            isPersonalInfoOpen.value = false
+            isProfessionalTabOpen.value = true
+        }
+        else {
+            isProfessionalTabOpen.value = !isProfessionalTabOpen.value
+        }
     }
     const toggleFindMe = () => {
         isFindMeOpen.value = !isFindMeOpen.value
+    }
+    const toggleEducation = () => {
+        isEducationOpen.value = !isEducationOpen.value
+    }
+    const toggleBio=()=>{
+        isBioOpen.value=!isBioOpen.value
     }
     return {
         isSidebarOpen,
@@ -24,11 +49,17 @@ export const useStateStore = defineStore('state', () => {
         ishelloOpen,
         isProjectPageOpen,
         isPersonalInfoOpen,
+        isContactMeOpen,
+        isFindMeOpen,
+        isSuccess,
+        isEducationOpen,
+        isProfessionalTabOpen,
+        isBioOpen,
         toggleSidebar,
         togglePersonalInfo,
         toggleFindMe,
-        isContactMeOpen,
-        isFindMeOpen,
-        isSuccess
+        toggleEducation,
+        toggleProfessionalTab,
+        toggleBio,
     }
 })
