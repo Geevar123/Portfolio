@@ -15,24 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { projects } from '@/dataStore/Projects';
 import type { Project } from '@/interfaces/ProjectType'
 
-const projectData = ref<Project[]>([])
-
-const fetchProject = async () => {
-    try {
-        const apiData = await fetch(' http://localhost:3002/projects')
-        const apiJsondata = await apiData.json()
-        projectData.value = apiJsondata
-    } catch (error) {
-        console.error('Error fetching data:', error)
-    }
-}
-
-onMounted(async () => {
-    await fetchProject()
-})
+const projectData = ref<Project[]>(projects)
 </script>
 
 <style scoped lang="scss">
