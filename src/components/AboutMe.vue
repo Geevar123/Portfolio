@@ -48,10 +48,18 @@
                             'about-me__inner-tab--orange-icon': true
                         }">skills</p>
                         <ul class="about-me__skills-tabs-list" v-if="stateStore.isSkillsOpen" data-aos="flip-down">
-                            <li class="about-me__skill-tab about-me__skill-tab--frontend">front-end</li>
-                            <li class="about-me__skill-tab about-me__skill-tab--backend">back-end</li>
-                            <li class="about-me__skill-tab about-me__skill-tab--database">database</li>
-                            <li class="about-me__skill-tab">others</li>
+                            <li @click.prevent="stateStore.toggleFrontend"
+                                :class="{ 'about-me__skill-tab': true, 'about-me__skill-tab--frontend': true, 'about-me__inner-tab-open': stateStore.isFrontendOpen }">
+                                front-end</li>
+                            <li @click.prevent="stateStore.toggleBackend"
+                                :class="{ 'about-me__skill-tab': true, 'about-me__skill-tab--backend': true, 'about-me__inner-tab-open': stateStore.isBackendOpen }">
+                                back-end</li>
+                            <li @click.prevent="stateStore.toggleDatabase"
+                                :class="{ 'about-me__skill-tab': true, 'about-me__skill-tab--database': true, 'about-me__inner-tab-open': stateStore.isDatabaseOpen }">
+                                database</li>
+                            <li @click.prevent="stateStore.toggleOtherSkills"
+                                :class="{ 'about-me__skill-tab': true, 'about-me__inner-tab-open': stateStore.isOtherSkillsOpen }">
+                                others</li>
                         </ul>
                     </li>
                     <li
@@ -81,11 +89,12 @@
                 </div>
             </li>
         </ul>
-        <section :class="{ 'about-me__content': true, 'about-me__content--inEduView': stateStore.isEducationOpen }">
-            <div v-if="stateStore.isBioOpen" data-aos="fade-down" data-aos-duration="800">
-                <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/ bio</span>
+        <section :class="{ 'about-me__content': true }">
+            <div v-if="stateStore.isBioOpen || stateStore.isEducationOpen || stateStore.isInerestedOpen">
+                <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/
+                        {{ personalSubTitle }}</span>
                 </h3>
-                <p class="about-me__content-info">
+                <p v-if="stateStore.isBioOpen" data-aos="fade-down" data-aos-duration="800" class="about-me__content-info">
                     I am a dedicated Frontend Developer with 1 year of experience. Specializing in Vue.js and
                     React, I create dynamic, high-performance web interfaces that excel in user experience. My focus on
                     performance, accessibility, and SEO ensures websites that are both eye-catching and efficient. With a
@@ -94,13 +103,9 @@
                     top-quality work. I stay updated with the latest trends, always ready to explore new projects and
                     opportunities. Let's connect and discuss the exciting world of web development.
                 </p>
-            </div>
-            <education-timeline v-else-if="stateStore.isEducationOpen" />
-            <div v-else-if="stateStore.isInerestedOpen" data-aos="fade-down" data-aos-duration="800">
-                <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/
-                        interested</span>
-                </h3>
-                <p class="about-me__content-info">
+                <education-timeline v-else-if="stateStore.isEducationOpen" />
+                <p class="about-me__content-info" v-else-if="stateStore.isInerestedOpen" data-aos="fade-down"
+                    data-aos-duration="800">
                     As a web developer, I have a keen interest in emerging technologies and innovative web solutions.<br>
                     I'm passionate about creating seamless user experiences and leveraging the power of web development to
                     bring ideas to life. Constantly learning and exploring new trends.<br>
@@ -108,22 +113,74 @@
                     extraordinary digital experiences together.
                 </p>
             </div>
+            <div v-if="stateStore.isProfessionalTabOpen && stateStore.isSkillsOpen || stateStore.isExperienceOpen">
+                <h3 class="about-me__content-title">// professional-info <span class="about-me__content-title--bio">/
+                        {{ professionalSubTitle }}</span></h3>
+                <div>
+                    <h5 class="about-me__skills-title">//_front-end-skills</h5>
+                    <div class="about-me__skills-list">
+                        <div class="about-me__skill-wrapper">
+                            <img class="about-me__skill-icon" src="@/assets/icons/html-icon-big.png" alt="">
+                            <p class="about-me__skill-name">HTML</p>
+                        </div>
+                        <div class="about-me__skill-wrapper">
+                            <img class="about-me__skill-icon" src="@/assets//icons/css-icon.png" alt="">
+                            <p class="about-me__skill-name">CSS</p>
+                        </div>
+                        <div class="about-me__skill-wrapper">
+                            <img class="about-me__skill-icon" src="@/assets/icons/tailwind-icon.png" alt="">
+                            <p class="about-me__skill-name">Tailwind</p>
+                        </div>
+                        <div class="about-me__skill-wrapper">
+                            <img class="about-me__skill-icon" src="@/assets/icons/bootstrap-icon.png" alt="">
+                            <p class="about-me__skill-name">Bootstrap</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <code-snippet />
     </main>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 import { useStateStore } from '@/stores/StateStore';
 import CodeSnippet from '@/components/CodeSnippet.vue';
 import EducationTimeline from '@/components/EducationTimeline.vue'
 const stateStore = useStateStore()
+const professionalSubTitle = ref('')
+const personalSubTitle = ref('')
+
+const checkFlagStatus = () => {
+    if (stateStore.isPersonalInfoOpen) {
+        if (stateStore.isBioOpen) {
+            personalSubTitle.value = ('Bio')
+        }
+        else if (stateStore.isEducationOpen) {
+            personalSubTitle.value = ('education')
+        }
+        else if (stateStore.isInerestedOpen) {
+            personalSubTitle.value = ('interested')
+        }
+    }
+    else if (stateStore.isProfessionalTabOpen) {
+        if (stateStore.isSkillsOpen) {
+            professionalSubTitle.value = ('skills')
+        }
+        else if (stateStore.isExperienceOpen) {
+            professionalSubTitle.value = ('experience')
+        }
+    }
+}
 onMounted(() => {
     stateStore.isPersonalInfoOpen = true
     stateStore.isBioOpen = true
     stateStore.isEducationOpen = false
     stateStore.isInerestedOpen = false
+})
+onUpdated(() => {
+    checkFlagStatus();
 })
 </script>
 
@@ -240,7 +297,7 @@ onMounted(() => {
     }
 
     &__inner-tab-open {
-        color: $whiteHex;
+        color: $whiteHex !important;
 
         &::before {
             transform: scale(1.3);
@@ -286,6 +343,40 @@ onMounted(() => {
         &--database::before {
             background-image: url('@/assets/icons/database-icon.svg')
         }
+    }
+
+    &__skills-title {
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 400;
+        color: $blueHex-05;
+        padding-bottom: 20px;
+
+    }
+
+    &__skills-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 34px 10px;
+
+    }
+
+    &__skill-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__skill-icon {
+        max-width: 64px;
+        max-height: 64px;
+    }
+
+    &__skill-name {
+        color: $blueHex-05;
+        text-align: center
     }
 
 
@@ -364,4 +455,5 @@ onMounted(() => {
         line-height: 24px;
         margin-bottom: 38px;
     }
-}</style>
+}
+</style>

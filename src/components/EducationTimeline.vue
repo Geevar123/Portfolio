@@ -1,7 +1,5 @@
 <template>
-    <section class="education__wrapper" data-aos="fade-down"
-         
-         data-aos-duration="800">
+    <section class="education__wrapper" data-aos="fade-down" data-aos-duration="800">
         <div class="education__card-wrapper" v-for="education in eduStore" :key="education.courseTitle">
             <div class="education__timeline-icon education__timeline-icon--graduate"></div>
             <div class="education__school-card">
@@ -41,7 +39,8 @@ const eduStore = education
             background-color: $blueHex-05;
         }
     }
-    &__card-wrapper{
+
+    &__card-wrapper {
         margin-inline: 35px;
     }
 
