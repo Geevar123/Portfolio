@@ -5,51 +5,103 @@
         </div>
         <ul class="about-me__tab-list">
             <li class="about-me__tab">
-                <h3 class="about-me__tab-title" :class="{ 'about-me__personal-info-open': stateStore.isPersonalInfoOpen }"
-                    @click="stateStore.togglePersonalInfo">personal-info</h3>
-                <ul v-show="stateStore.isPersonalInfoOpen" class="about-me__personal-tabs">
-                    <li class="about-me__tab-wrapper">
-                        <h4 @click="stateStore.toggleBio" class="about-me__personal-tab about-me__personal-tab--bio-tab">bio
-                        </h4>
+                <h3 :class="{ 'about-me__tab-title': true, 'about-me__personal-info-open': stateStore.isPersonalInfoOpen }"
+                    @click.prevent="stateStore.togglePersonalInfo" data-aos="fade-right" data-aos-duration="500">
+                    personal-info</h3>
+                <ul v-if="stateStore.isPersonalInfoOpen" class="about-me__tabs-wrapper" data-aos="flip-down">
+                    <li class="about-me__inner-tab-wrapper">
+                        <p @click.prevent="stateStore.toggleBio" :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--orange-icon': true,
+                            'about-me__inner-tab-open': stateStore.isBioOpen
+                        }">bio
+                        </p>
                     </li>
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--education-tab">education</h4>
+                    <li class="about-me__inner-tab-wrapper">
+                        <p @click.prevent="stateStore.toggleEducation" :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--green-icon': true,
+                            'about-me__inner-tab-open': stateStore.isEducationOpen
+                        }">
+                            education</p>
                     </li>
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--interest-tab">interested</h4>
+                    <li class="about-me__inner-tab-wrapper">
+                        <p @click.prevent="stateStore.toggleInterested" :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--blue-icon': true,
+                            'about-me__inner-tab-open': stateStore.isInerestedOpen
+                        }">interested</p>
                     </li>
                 </ul>
             </li>
             <li class="about-me__tab">
-                <h3 @click.prevent="stateStore.toggleProfessionalTab" class="about-me__tab-title">professional-info</h3>
-                <ul v-show="stateStore.isProfessionalTabOpen" class="about-me__personal-tabs">
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--bio-tab">skills</h4>
+                <h3 @click.prevent="stateStore.toggleProfessionalTab"
+                    :class="{ 'about-me__tab-title': true, 'about-me__professional-info-open': stateStore.isProfessionalTabOpen }"
+                    data-aos="fade-right" data-aos-duration="500">
+                    professional-info</h3>
+                <ul v-if="stateStore.isProfessionalTabOpen" class="about-me__tabs-wrapper" data-aos="flip-down">
+                    <li class="about-me__inner-tab-wrapper">
+                        <p @click.prevent="stateStore.toggleSkills" :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--orange-icon': true,
+                            'about-me__inner-tab-open': stateStore.isSkillsOpen
+                        }">skills</p>
                     </li>
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--interest-tab">languages</h4>
+                    <li class="about-me__inner-tab-wrapper">
+                        <p @click.prevent="stateStore.toggleExperience" :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--green-icon': true,
+                            'about-me__inner-tab-open': stateStore.isExperienceOpen
+                        }">experience</p>
                     </li>
-                    <li class="about-me__tab-wrapper">
-                        <h4 class="about-me__personal-tab about-me__personal-tab--education-tab">experience</h4>
+                    <li class="about-me__inner-tab-wrapper">
+                        <p :class="{
+                            'about-me__inner-tab': true,
+                            'about-me__inner-tab--blue-icon': true,
+                            'about-me__inner-tab-open': stateStore.isInerestedOpen
+                        }">languages</p>
                     </li>
                 </ul>
             </li>
             <li class="about-me__tab">
-                <h3 class="about-me__tab-title">contacts</h3>
+                <h3 :class="{ 'about-me__tab-title': true, 'about-me__contact-tab-open': stateStore.isContactOpen }"
+                    @click.prevent="stateStore.toggleContactTab" data-aos="fade-right" data-aos-duration="500">contacts</h3>
+                <div v-if="stateStore.isContactOpen" class="about-me__contact-tab" data-aos="flip-down">
+                    <p class="about-me__contact-email-title">send email</p>
+                    <p class="about-me__contact-email">geevarjacob123@gmail.com</p>
+                    <div class="about-me__contact-phone-wrapper">
+                        <p class="about-me__contact-phone">+91 9496258955 <br> +91 9061040334</p>
+                    </div>
+                </div>
             </li>
         </ul>
-        <section v-show="stateStore.isBioOpen" class="about-me__content">
-            <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/ bio</span>
-            </h3>
-            <p class="about-me__content-info">
-                I am a dedicated Frontend Developer with 1 year of experience. Specializing in Vue.js and
-                React, I create dynamic, high-performance web interfaces that excel in user experience. My focus on
-                performance, accessibility, and SEO ensures websites that are both eye-catching and efficient. With a
-                Full
-                Stack Developer certification, my comprehensive understanding of web development drives me to deliver
-                top-quality work. I stay updated with the latest trends, always ready to explore new projects and
-                opportunities. Let's connect and discuss the exciting world of web development.
-            </p>
+        <section :class="{ 'about-me__content': true, 'about-me__content--inEduView': stateStore.isEducationOpen }">
+            <div v-if="stateStore.isBioOpen" data-aos="fade-down" data-aos-duration="800">
+                <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/ bio</span>
+                </h3>
+                <p class="about-me__content-info">
+                    I am a dedicated Frontend Developer with 1 year of experience. Specializing in Vue.js and
+                    React, I create dynamic, high-performance web interfaces that excel in user experience. My focus on
+                    performance, accessibility, and SEO ensures websites that are both eye-catching and efficient. With a
+                    Full
+                    Stack Developer certification, my comprehensive understanding of web development drives me to deliver
+                    top-quality work. I stay updated with the latest trends, always ready to explore new projects and
+                    opportunities. Let's connect and discuss the exciting world of web development.
+                </p>
+            </div>
+            <education-timeline v-else-if="stateStore.isEducationOpen" />
+            <div v-else-if="stateStore.isInerestedOpen" data-aos="fade-down" data-aos-duration="800">
+                <h3 class="about-me__content-title">// personal-info <span class="about-me__content-title--bio">/
+                        interested</span>
+                </h3>
+                <p class="about-me__content-info">
+                    As a web developer, I have a keen interest in emerging technologies and innovative web solutions.<br>
+                    I'm passionate about creating seamless user experiences and leveraging the power of web development to
+                    bring ideas to life. Constantly learning and exploring new trends.<br>
+                    I thrive on the dynamic nature of the web development industry. Let's collaborate and build
+                    extraordinary digital experiences together.
+                </p>
+            </div>
         </section>
         <code-snippet />
     </main>
@@ -59,11 +111,15 @@
 import { onMounted } from 'vue'
 import { useStateStore } from '@/stores/StateStore';
 import CodeSnippet from '@/components/CodeSnippet.vue';
-
+import EducationTimeline from '@/components/EducationTimeline.vue'
+import AOS from 'aos'
 const stateStore = useStateStore()
 onMounted(() => {
     stateStore.isPersonalInfoOpen = true
     stateStore.isBioOpen = true
+    stateStore.isEducationOpen = false
+    stateStore.isInerestedOpen = false
+    AOS.refresh()
 })
 </script>
 
@@ -105,6 +161,7 @@ onMounted(() => {
         align-items: center;
         column-gap: 12px;
         padding-left: 27px;
+        cursor: pointer;
 
         &::before {
             content: '';
@@ -119,74 +176,102 @@ onMounted(() => {
         transform: rotate(0deg);
     }
 
-    &__personal-tabs {
-        list-style: none;
-        padding-left: 27px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 8px;
-        padding-block: 16px;
-        transition: all .4s ease-in-out;
+    &__tabs-wrapper {
+        @include tabs-style;
     }
 
-    &__tab-wrapper {
-        width: 100%;
-        height: 21px;
-        display: flex;
-        align-items: center;
-        column-gap: 12px;
-
-        &::before {
-            content: "";
-            width: 8px;
-            height: 100%;
-            margin-left: 2px;
-            background: url('@/assets/icons/right-arrow.svg') no-repeat center/7px 12px;
-        }
+    &__inner-tab-wrapper {
+        @include inner-tab-wrapper;
     }
 
-    &__personal-tab {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 21px;
-        display: flex;
-        align-items: center;
-        column-gap: 9px;
+    &__inner-tab {
+        @include inner-tab;
 
-        &::before {
-            content: '';
-            width: 14px;
-            height: 13px;
-        }
-
-        &--bio-tab {
-            color: $blueHex-05;
-
+        &--orange-icon {
             &::before {
                 background: url('@/assets/icons/folder-orange.svg') no-repeat center / 100%;
             }
         }
 
-        &--interest-tab {
-            color: $blueHex-05;
-
+        &--green-icon {
             &::before {
                 background: url('@/assets/icons/folder-green.svg') no-repeat center / 100%;
             }
         }
 
-        &--education-tab {
-            color: $blueHex-05;
-
+        &--blue-icon {
             &::before {
                 background: url('@/assets/icons/folder-blue.svg') no-repeat center / 100%;
             }
+        }
+
+    }
+
+    &__inner-tab-open {
+        color: $whiteHex;
+
+        &::before {
+            transform: scale(1.3);
+        }
+    }
+
+    &__professional-info-open::before {
+        transform: rotate(0deg);
+    }
+
+    &__contact-tab {
+        @include tabs-style;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: $blueHex-05;
+        padding-bottom: 0;
+    }
+
+    &__contact-tab-open::before {
+        transform: rotate(0deg);
+    }
+
+    &__contact-email-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 8px;
+
+        &::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('@/assets/icons/email-icon.svg') no-repeat center / 100%;
+        }
+    }
+
+    &__contact-email {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    &__contact-phone-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 8px;
+
+        &::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('@/assets/icons/phone-icon.svg') no-repeat center / 100%;
         }
     }
 
     &__content {
         margin-block: 38px;
         padding-inline: 27px;
+
+        &--inEduView {
+            margin-block: 0;
+        }
     }
 
     &__content-title {

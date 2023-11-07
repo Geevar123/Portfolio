@@ -7,29 +7,13 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { useStateStore } from '@/stores/StateStore';
 const stateStore = useStateStore()
+const router = useRouter()
+
 const toggleView = () => {
-    if (stateStore.ishelloOpen) {
-        stateStore.ishelloOpen = false
-        stateStore.isSidebarOpen = true
-    }
-    else if (stateStore.isSidebarOpen) {
-        stateStore.isSidebarOpen = false
-        stateStore.ishelloOpen = true
-    }
-    else if (stateStore.isAboutMeOpen) {
-        stateStore.isAboutMeOpen = false
-        stateStore.isSidebarOpen = true
-    }
-     else if (stateStore.isProjectPageOpen) {
-        stateStore.isProjectPageOpen = false
-        stateStore.isSidebarOpen = true
-    }
-    else if (stateStore.isContactMeOpen) {
-        stateStore.isContactMeOpen = false
-        stateStore.isSidebarOpen = true
-    }
+    router.push('/sidebar')
 }
 </script>
 
@@ -58,6 +42,7 @@ const toggleView = () => {
         background: url('@/assets/icons/breadcrumbs.svg') no-repeat center/18px;
         z-index: 1;
         position: relative;
+        cursor: pointer;
 
         &::after {
             display: none;

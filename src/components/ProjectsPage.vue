@@ -12,14 +12,20 @@
         <section class="projects__content">
             <h4 class="projects__content-title">// personal-info <span class="projects__content-title--bio">/ all</span>
             </h4>
-            <project-card />
+            <ul>
+                <li v-for="project in projectData" :key="project.projectId"><project-card :projectData="project" /></li>
+            </ul>
         </section>
     </main>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useStateStore } from '@/stores/StateStore';
 import ProjectCard from '@/components/ProjectCard.vue';
+import { projects } from '@/dataStore/Projects';
+import type { Project } from '@/interfaces/ProjectType'
+const projectData = ref<Project[]>(projects)
 const stateStore = useStateStore()
 </script>
 

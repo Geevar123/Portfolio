@@ -9,16 +9,19 @@
   outline: none;
   border: none;
 }
-a{
-  text-decoration: none;
-}
-button{
-  outline: none;
-}
 body {
   background: $blueHex-01;
   font-family: $font-family;
   margin: 15px;
   border: 1px solid $blueHex-03;
   border-radius: 8px;
+}
+a {
+  text-decoration: none;
+}
+button {
+  outline: none;
+}
+li {
+  list-style: none;
 }

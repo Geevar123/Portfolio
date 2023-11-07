@@ -1,13 +1,14 @@
 <template>
-    <figure class="project-card__wrapper" v-for="project in projectData" :key="project.projectId">
-        <h5 class="project-card__title">Project {{ project.projectId }} <span class="project-card__title--project-name">/
-                {{ project.name }}</span>
+    <figure class="project-card__wrapper"  data-aos="flip-down">
+        <h5 class="project-card__title">Project {{ projectData.projectId }} <span
+                class="project-card__title--project-name">/
+                {{ projectData.name }}</span>
         </h5>
         <div class="project-card">
-            <div class="project-card__thumbnail" :style="'background-image: url(' + project.projectImage + ');'"></div>
+            <div class="project-card__thumbnail" :style="'background-image: url(' + projectData.projectImage + ');'"></div>
             <div class="project-card__content">
-                <p class="project-card__description">{{ project.description }}</p>
-                <a :href="project.projectUrl" target="_blank" class="project-card__git-link">view
+                <p class="project-card__description">{{ projectData.description }}</p>
+                <a :href="projectData.projectUrl" target="_blank" class="project-card__git-link">view
                     project</a>
             </div>
         </div>
@@ -15,11 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { projects } from '@/dataStore/Projects';
 import type { Project } from '@/interfaces/ProjectType'
-
-const projectData = ref<Project[]>(projects)
+defineProps<{
+    projectData: Project
+}>()
 </script>
 
 <style scoped lang="scss">

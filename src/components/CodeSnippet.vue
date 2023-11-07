@@ -1,7 +1,7 @@
 <template>
     <div class="code-snippet__wrapper">
-        <h3 class="code-snippet__title">// Code snippet showcase: </h3>
-        <figure class="code-snippet">
+        <h6 class="code-snippet__title">// Code snippet showcase: </h6>
+        <figure class="code-snippet" data-aos="flip-down">
             <header class="code-snippet__header">
                 <div class="code-snippet__user-head"></div>
                 <div class="code-snippet__user-data">
@@ -10,17 +10,79 @@
                 </div>
                 <h5 class="code-snippet__user-details">details</h5>
             </header>
-            <p class="code-snippet__code-display">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat provident totam saepe, cumque odio
-                itaque repudiandae quis corporis fuga, earum obcaecati sed tenetur iste suscipit ullam eaque ipsum.
-                ratione ea voluptas
-            </p>
+            <div class="code-snippet__code-display">
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">function
+                    </span><span class="code-snippet__code-lines--yellow-font">initializeModelChunk(<span
+                            class="code-snippet__code-lines--pink-font">chunk</span>)</span> {</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">const </span>value =
+                    parseModel(chunk._response, chunk._value);
+                </p>
+                <p class="code-snippet__code-lines"><span
+                        class="code-snippet__code-lines--green-font">const</span>initializedChunk = chunk;</p>
+                <p class="code-snippet__code-lines">initializedChunk._status = INITIALIZED;</p>
+                <p class="code-snippet__code-lines">initializedChunk._value = value;</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">return</span> value;
+                </p>
+                <p class="code-snippet__code-lines">}</p>
+            </div>
+        </figure>
+        <figure class="code-snippet" data-aos="flip-down">
+            <header class="code-snippet__header">
+                <div class="code-snippet__user-head"></div>
+                <div class="code-snippet__user-data">
+                    <h4 class="code-snippet__user-name">@davidwilliams</h4>
+                    <p class="code-snippet__user-time">5 months ago</p>
+                </div>
+                <h5 class="code-snippet__user-details">details</h5>
+            </header>
+            <div class="code-snippet__code-display">
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">function
+                    </span><span class="code-snippet__code-lines--yellow-font">initializeModelChunk(<span
+                            class="code-snippet__code-lines--pink-font">chunk</span>)</span> {</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">const </span>value =
+                    parseModel(chunk._response, chunk._value);
+                </p>
+                <p class="code-snippet__code-lines"><span
+                        class="code-snippet__code-lines--green-font">const</span>initializedChunk = chunk;</p>
+                <p class="code-snippet__code-lines">initializedChunk._status = INITIALIZED;</p>
+                <p class="code-snippet__code-lines">initializedChunk._value = value;</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">return</span> value;
+                </p>
+                <p class="code-snippet__code-lines">}</p>
+            </div>
+        </figure>
+        <figure class="code-snippet" data-aos="flip-down">
+            <header class="code-snippet__header">
+                <div class="code-snippet__user-head"></div>
+                <div class="code-snippet__user-data">
+                    <h4 class="code-snippet__user-name">@davidwilliams</h4>
+                    <p class="code-snippet__user-time">5 months ago</p>
+                </div>
+                <h5 class="code-snippet__user-details">details</h5>
+            </header>
+            <div class="code-snippet__code-display">
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">function
+                    </span><span class="code-snippet__code-lines--yellow-font">initializeModelChunk(<span
+                            class="code-snippet__code-lines--pink-font">chunk</span>)</span> {</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">const </span>value =
+                    parseModel(chunk._response, chunk._value);
+                </p>
+                <p class="code-snippet__code-lines"><span
+                        class="code-snippet__code-lines--green-font">const</span>initializedChunk = chunk;</p>
+                <p class="code-snippet__code-lines">initializedChunk._status = INITIALIZED;</p>
+                <p class="code-snippet__code-lines">initializedChunk._value = value;</p>
+                <p class="code-snippet__code-lines"><span class="code-snippet__code-lines--green-font">return</span> value;
+                </p>
+                <p class="code-snippet__code-lines">}</p>
+            </div>
         </figure>
     </div>
 </template>
 
 <style scoped lang="scss">
 .code-snippet {
+    margin-top: 32px;
+
     &__wrapper {
         padding-inline: 27px;
         margin-block: 38px;
@@ -95,12 +157,43 @@
         border-radius: 15px;
         border: 1px solid $blueHex-03;
         background: $blueHex-02;
-        padding: 24px;
+        padding: 10px;
         color: $blueHex-05;
+        counter-reset: custom-li;
+        overflow-x: auto;
+        white-space: pre;
+    }
+
+    &__code-lines {
+        counter-increment: custom-li;
+        position: relative;
+        padding-left: 20px;
         font-size: 14px;
         font-weight: 400;
-        line-height: 23px;
-        text-align: justify;
+        line-height: 21px;
+        color: $grayHex-02;
+
+        &::before {
+            position: absolute;
+            left: 0;
+            content: counter(custom-li);
+        }
+
+        &:not(:first-child):not(:last-child) {
+            padding-left: 34px;
+        }
+
+        &--green-font {
+            color: $greenHex-02;
+        }
+
+        &--yellow-font {
+            color: $yellowHex-02;
+        }
+
+        &--pink-font {
+            color: $pinkHex-01 ;
+        }
     }
 }
 </style>

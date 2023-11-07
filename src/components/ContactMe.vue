@@ -11,7 +11,7 @@
                 <h3 :class="{ 'contact-me__tab-title': true, 'contact-me__find-me-open': stateStore.isFindMeOpen }"
                     @click.prevent="stateStore.toggleFindMe">
                     find-me-also-in</h3>
-                <div v-show="stateStore.isFindMeOpen" class="contact-me__find-me">
+                <div v-if="stateStore.isFindMeOpen" class="contact-me__find-me" data-aos="flip-down">
                     <a href="" target="_blank" class="contact-me__find-me-link">LinkedIn profile</a>
                     <a href="" class="contact-me__find-me-link">Github profile</a>
                     <a href="" class="contact-me__find-me-link">Instagram account</a>
@@ -19,7 +19,7 @@
                 </div>
             </li>
         </ul>
-        <form v-if="!stateStore.isSuccess" class="contact-me__content">
+        <form v-if="!stateStore.isSuccess" class="contact-me__content" data-aos="fade-left">
             <div class="contact-me__content-wrapper">
                 <label for="name" class="contact-me__label">_name:</label>
                 <input type="text" class="contact-me__input" id="name">
@@ -45,7 +45,9 @@
 
 <script setup lang="ts">
 import { useStateStore } from '@/stores/StateStore';
+
 const stateStore = useStateStore()
+
 </script>
 
 <style scoped lang="scss">
@@ -83,6 +85,7 @@ const stateStore = useStateStore()
         align-items: center;
         column-gap: 12px;
         padding-left: 27px;
+        cursor: pointer;
 
         &::before {
             content: '';
