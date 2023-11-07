@@ -47,7 +47,7 @@ defineProps<{
         width: 100%;
         max-width: 370px;
         height: 147px;
-        background: no-repeat top center / 100% 100%;
+        background: no-repeat top center / 100%;
         border-bottom: 1px solid $blueHex-03;
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;

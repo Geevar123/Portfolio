@@ -9,7 +9,7 @@
                     @click.prevent="stateStore.togglePersonalInfo" data-aos="fade-right" data-aos-duration="500">
                     personal-info</h3>
                 <ul v-if="stateStore.isPersonalInfoOpen" class="about-me__tabs-wrapper" data-aos="flip-down">
-                    <li class="about-me__inner-tab-wrapper">
+                    <li class="about-me__personal-tab-wrapper">
                         <p @click.prevent="stateStore.toggleBio" :class="{
                             'about-me__inner-tab': true,
                             'about-me__inner-tab--orange-icon': true,
@@ -17,7 +17,7 @@
                         }">bio
                         </p>
                     </li>
-                    <li class="about-me__inner-tab-wrapper">
+                    <li class="about-me__personal-tab-wrapper">
                         <p @click.prevent="stateStore.toggleEducation" :class="{
                             'about-me__inner-tab': true,
                             'about-me__inner-tab--green-icon': true,
@@ -25,7 +25,7 @@
                         }">
                             education</p>
                     </li>
-                    <li class="about-me__inner-tab-wrapper">
+                    <li class="about-me__personal-tab-wrapper">
                         <p @click.prevent="stateStore.toggleInterested" :class="{
                             'about-me__inner-tab': true,
                             'about-me__inner-tab--blue-icon': true,
@@ -39,28 +39,34 @@
                     :class="{ 'about-me__tab-title': true, 'about-me__professional-info-open': stateStore.isProfessionalTabOpen }"
                     data-aos="fade-right" data-aos-duration="500">
                     professional-info</h3>
-                <ul v-if="stateStore.isProfessionalTabOpen" class="about-me__tabs-wrapper" data-aos="flip-down">
-                    <li class="about-me__inner-tab-wrapper">
+                <ul v-if="stateStore.isProfessionalTabOpen"
+                    class="about-me__tabs-wrapper about-me__tabs-wrapper--professional-tabs" data-aos="flip-down">
+                    <li
+                        :class="{ 'about-me__professional-tab-wrapper': true, 'about-me__professional-tab-wrapper--tab-open': stateStore.isSkillsOpen }">
                         <p @click.prevent="stateStore.toggleSkills" :class="{
                             'about-me__inner-tab': true,
-                            'about-me__inner-tab--orange-icon': true,
-                            'about-me__inner-tab-open': stateStore.isSkillsOpen
+                            'about-me__inner-tab--orange-icon': true
                         }">skills</p>
+                        <ul class="about-me__skills-tabs-list" v-if="stateStore.isSkillsOpen" data-aos="flip-down">
+                            <li class="about-me__skill-tab about-me__skill-tab--frontend">front-end</li>
+                            <li class="about-me__skill-tab about-me__skill-tab--backend">back-end</li>
+                            <li class="about-me__skill-tab about-me__skill-tab--database">database</li>
+                            <li class="about-me__skill-tab">others</li>
+                        </ul>
                     </li>
-                    <li class="about-me__inner-tab-wrapper">
+                    <li
+                        :class="{ 'about-me__professional-tab-wrapper': true, 'about-me__professional-tab-wrapper--tab-open': stateStore.isExperienceOpen }">
                         <p @click.prevent="stateStore.toggleExperience" :class="{
                             'about-me__inner-tab': true,
-                            'about-me__inner-tab--green-icon': true,
-                            'about-me__inner-tab-open': stateStore.isExperienceOpen
+                            'about-me__inner-tab--green-icon': true
                         }">experience</p>
                     </li>
-                    <li class="about-me__inner-tab-wrapper">
+                    <!-- <li :class="{ 'about-me__professional-tab-wrapper': true }">
                         <p :class="{
                             'about-me__inner-tab': true,
-                            'about-me__inner-tab--blue-icon': true,
-                            'about-me__inner-tab-open': stateStore.isInerestedOpen
+                            'about-me__inner-tab--blue-icon': true
                         }">languages</p>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <li class="about-me__tab">
@@ -112,14 +118,12 @@ import { onMounted } from 'vue'
 import { useStateStore } from '@/stores/StateStore';
 import CodeSnippet from '@/components/CodeSnippet.vue';
 import EducationTimeline from '@/components/EducationTimeline.vue'
-import AOS from 'aos'
 const stateStore = useStateStore()
 onMounted(() => {
     stateStore.isPersonalInfoOpen = true
     stateStore.isBioOpen = true
     stateStore.isEducationOpen = false
     stateStore.isInerestedOpen = false
-    AOS.refresh()
 })
 </script>
 
@@ -178,14 +182,42 @@ onMounted(() => {
 
     &__tabs-wrapper {
         @include tabs-style;
+
+        &--professional-tabs {
+            padding-left: 21px
+        }
     }
 
-    &__inner-tab-wrapper {
-        @include inner-tab-wrapper;
+    &__personal-tab-wrapper {
+        width: 100%;
+        height: 21px;
+    }
+
+    &__professional-tab-wrapper {
+        width: 100%;
+        position: relative;
+        padding-left: 28px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+
+        &::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            left: 0;
+            background: url('@/assets/icons/right-arrow.svg') no-repeat center / 8px 12px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        &--tab-open::before {
+            transform: rotate(90deg)
+        }
     }
 
     &__inner-tab {
-        @include inner-tab;
+        @include inner-tab-style;
 
         &--orange-icon {
             &::before {
@@ -218,6 +250,44 @@ onMounted(() => {
     &__professional-info-open::before {
         transform: rotate(0deg);
     }
+
+    &__skills-tabs-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+        margin-bottom: 8px;
+    }
+
+    &__skill-tab {
+        height: 24px;
+        color: $blueHex-05;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+
+        &::before {
+            content: '';
+            width: 21px;
+            height: 21px;
+            background: url('@/assets/icons//other-icon.svg') no-repeat center / 100%;
+        }
+
+        &--frontend::before {
+            background-image: url('@/assets/icons/html-icon-small.svg')
+        }
+
+        &--backend::before {
+            background-image: url('@/assets/icons/js-icon-small.svg')
+        }
+
+        &--database::before {
+            background-image: url('@/assets/icons/database-icon.svg')
+        }
+    }
+
 
     &__contact-tab {
         @include tabs-style;
@@ -294,5 +364,4 @@ onMounted(() => {
         line-height: 24px;
         margin-bottom: 38px;
     }
-}
-</style>
+}</style>
