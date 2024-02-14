@@ -23,3 +23,14 @@ $whiteHex: #ffffff;
 
 // font-family
 $font-family: 'Fira Code', monospace;
+
+$break-mobile-sm: 'only screen and (max-width: 425px)'; // mobile small
+$break-mobile-md: 'only screen and (max-width: 436px)'; // mobile medium
+$break-mobile-lg: 'only screen and (max-width: 480px)'; // mobile large
+$break-s: 'only screen and (max-width: 600px)'; // Mobile small
+$break-laptop-lg: 'only screen and (max-width:1649px)'; // Large laptop
+$break-xxl: 'only screen and (max-width:2015px)'; //extra Large Desktop
+
+$break-height-600: 'only screen and (max-height:600px)'; // Large Desktop
+$break-tab-sm: 'only screen and (min-width: 768px)'; // Mobile small
+$break-tab-sm-max: 'only screen and (max-width: 768px)'; // Mobile small

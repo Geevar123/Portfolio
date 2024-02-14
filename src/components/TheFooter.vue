@@ -41,7 +41,7 @@
         }
 
         &--git-icon {
-            background: url('@/assets/icons/git.svg') no-repeat center / 24px;
+            background: url('@/assets/icons/git-hub-icon.svg') no-repeat center / 24px;
         }
 
         &:first-child {
